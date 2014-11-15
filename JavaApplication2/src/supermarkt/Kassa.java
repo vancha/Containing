@@ -5,6 +5,11 @@
 package supermarkt;
 
 import java.util.ArrayList;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -14,6 +19,7 @@ public class Kassa {
 
     public Kassa() {
     }
+    public static SessionFactory factory;
     Werknemer operator;
     ArrayList<Klant> klanten = new ArrayList<>();
 
@@ -47,6 +53,34 @@ public class Kassa {
         }
         if (klanten.isEmpty() && (Supermarkt.kassas.size() != 1)) {
             leaveKassa();
+        }
+    }
+     public void addArtikel(String prodNaam, double prodPrijs, String datum, String prodType, int prodPortie){
+        System.out.println("Ik voeg nu een artikel toe.");
+        try{
+            factory = new Configuration().configure().buildSessionFactory();
+        }catch(Throwable ex){
+            System.out.println(ex.toString());
+        }
+        Transaction tx = null;
+        try
+        {
+            Session session = factory.openSession();
+        
+        Integer artikelID = null;
+        tx = session.beginTransaction();
+        Artikel artikel = new Artikel(prodNaam, prodPrijs, datum, prodType, prodPortie);
+        session.save(artikel);
+        tx.commit();
+        session.close();
+        }catch(HibernateException e){
+            if(tx != null)tx.rollback();
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            //Logger.getLogger(Kassa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
