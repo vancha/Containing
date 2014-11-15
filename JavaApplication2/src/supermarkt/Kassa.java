@@ -31,7 +31,7 @@ public class Kassa {
             double bedrag = 0;
             
             for (Artikel a : klanten.get(0).wishlist) {
-                bedrag += a.getprodPrijs();
+                bedrag += a.getProdPrijs();
             }
             
             if (bedrag > klanten.get(0).geld) {

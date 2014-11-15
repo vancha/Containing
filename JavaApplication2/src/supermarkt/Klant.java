@@ -57,7 +57,7 @@ public class Klant {
 
         this.wishlist = setWishlist(variant);
         for(Artikel a : wishlist){
-            System.out.println(a.getprodNaam());
+            System.out.println(a.getProdNaam());
         }
 
     }
@@ -145,7 +145,7 @@ public class Klant {
 
                 }
                 if (!debug) {
-                    System.out.println("product " + p.artikelen.get(i).getprodNaam() + " zit niet meer in de wishlist van " + this.naam + ",: " + this.wishlist);
+                    System.out.println("product " + p.artikelen.get(i).getProdNaam() + " zit niet meer in de wishlist van " + this.naam + ",: " + this.wishlist);
                 }
             }
             if (this.wishlist.size() == 1) {
@@ -165,7 +165,7 @@ public class Klant {
 
                 }
                 if (!debug) {
-                    System.out.println("product " + a.artikelen.get(i).getprodNaam() + " zit niet meer in de wishlist van " + this.naam + ",: " + this.wishlist);
+                    System.out.println("product " + a.artikelen.get(i).getProdNaam() + " zit niet meer in de wishlist van " + this.naam + ",: " + this.wishlist);
                 }
             }
             if (this.wishlist.size() == 1) {
@@ -214,11 +214,11 @@ public class Klant {
                 for (int i = 0; i < Supermarkt.inventaris.size(); i++) {
                     for (int x = 0; x < (nurture * 10); x++) {
                         if (nature < nurture) {
-                            if ("bier".equals(Supermarkt.inventaris.get(i).getprodNaam())) {
+                            if ("bier".equals(Supermarkt.inventaris.get(i).getProdNaam())) {
                                 toAdd.add(Supermarkt.inventaris.get(i));
                             }
                         } else {
-                            if ("red bull".equals(Supermarkt.inventaris.get(i).getprodNaam())) {
+                            if ("red bull".equals(Supermarkt.inventaris.get(i).getProdNaam())) {
                                 toAdd.add(Supermarkt.inventaris.get(i));
                             }
                         }
@@ -244,7 +244,7 @@ public class Klant {
             case "Engineer": //Engineer koopt van alles, maar vooral energydrank/koffie
                 System.out.println("Type is Engineer");
                 for (int i = 0; i < Supermarkt.inventaris.size(); i++) {
-                    if ("red bull".equals(Supermarkt.inventaris.get(i).getprodNaam())) {
+                    if ("red bull".equals(Supermarkt.inventaris.get(i).getProdNaam())) {
                         for (int x = 0; x < (nurture * 10); x++) {
                             toAdd.add(Supermarkt.inventaris.get(i));
                         }
