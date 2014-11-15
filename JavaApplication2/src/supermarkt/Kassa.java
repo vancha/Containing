@@ -13,7 +13,7 @@ import org.hibernate.cfg.Configuration;
 
 /**
  *
- * @author Driving Ghost
+ * @author Driving Ghost, vancha
  */
 public class Kassa {
 
@@ -36,13 +36,15 @@ public class Kassa {
             
             double bedrag = 0;
             
-            for (Artikel a : klanten.get(0).wishlist) {
+            for (Artikel a : klanten.get(0).wishlist) {//wishlist? artikelen om af te rekenen komen toch uit het mandje? 
                 bedrag += a.getProdPrijs();
+                //addArtikel(); om artikelen mee af te rekenen
+                if(bedrag > klanten.get(0).geld){//te duur? kappen met afrekenen
+                     System.out.println("teveel gekocht handler needed");
+                    break;
+                }
             }
             
-            if (bedrag > klanten.get(0).geld) {
-                System.out.println("teveel gekocht handler needed");
-            }
             
             GUI.setKopers();
             GUI.updateProfit(bedrag);
@@ -70,7 +72,7 @@ public class Kassa {
         Integer artikelID = null;
         tx = session.beginTransaction();
         Artikel artikel = new Artikel(prodNaam, prodPrijs, datum, prodType, prodPortie);
-        session.save(artikel);
+        session.saveOrUpdate(artikel);
         tx.commit();
         session.close();
         }catch(HibernateException e){
